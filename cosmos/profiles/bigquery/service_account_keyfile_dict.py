@@ -23,6 +23,8 @@ class GoogleCloudServiceAccountDictProfileMapping(BaseProfileMapping):
         "keyfile_dict",
     ]
 
+    secret_fields = ["keyfile_dict"]
+
     airflow_param_mapping = {
         "project": "extra.project",
         # multiple options for dataset because of older Airflow versions
@@ -44,6 +46,6 @@ class GoogleCloudServiceAccountDictProfileMapping(BaseProfileMapping):
             "project": self.project,
             "dataset": self.dataset,
             "threads": self.profile_args.get("threads") or 1,
-            "keyfile_json": json.loads(self.keyfile_dict),
+            "keyfile_json": json.loads(self.get_env_var_format("keyfile_dict")),
             **self.profile_args,
         }
