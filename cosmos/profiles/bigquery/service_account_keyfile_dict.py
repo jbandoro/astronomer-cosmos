@@ -45,6 +45,7 @@ class GoogleCloudServiceAccountDictProfileMapping(BaseProfileMapping):
             "project": self.project,
             "dataset": self.dataset,
             "threads": self.profile_args.get("threads") or 1,
-            "keyfile_json": self.get_env_var_format("keyfile_dict"),
             **self.profile_args,
+            # keyfile_json should always get set as env var
+            "keyfile_json": self.get_env_var_format("keyfile_dict"),
         }
