@@ -28,4 +28,5 @@ def get_logger(name: str | None = None) -> logging.Logger:
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+    logger.propagate = False
     return logger
